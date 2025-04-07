@@ -31,6 +31,10 @@ For example :
 */
 /// ----------------------------- ///
 
+// I typically use C++ for my independent projects, so forgive me for using things not covered in class.
+// Please also forgive me for not using "using namespace std," when I tought myself C++ a lot of forums
+// would say not to use it so that tools from the standard library were easily identifiable.
+
 class expression {
 public:
 	virtual int eval() = 0;
@@ -54,26 +58,26 @@ public:
 	// Infix expression
 	virtual std::string infix() override {
 		char cstr[100];
-		std::string s = std::to_string(i);
+		std::string s = std::to_string(i); // std::to_string converts an integer to a std::string object
 		if (i >= 0) {
-			std::sprintf(cstr, "%s", s.c_str());
+			std::sprintf(cstr, "%s", s.c_str()); // .c_str() returns a std::string object as a C-style constant sized character pointer (const char*), making it usable by the std::sprintf method
 			return cstr;
 		}
 		else {
-			std::sprintf(cstr, "(%c %s)", '-', s.erase(0, 1).c_str());
+			std::sprintf(cstr, "(%c %s)", '-', s.erase(0, 1).c_str()); // .erase(0,1) removes 1 character at position 0 from a std::string and returns the new std::string. From testing it, I think it updates the current string object instead of creating a new string object, though I only tested it insofar as making the program run correctly, not to figure out how exactly it works. Used to remove the negative sign for postfix notation.
 			return  cstr;
 		}
 	}
 	// Postfix expression
 	virtual std::string postfix() override {
 		char cstr[100];
-		std::string s = std::to_string(i);
+		std::string s = std::to_string(i); // std::to_string converts an integer to a std::string object
 		if (i >= 0) {
-			std::sprintf(cstr, "%s", s.c_str());
+			std::sprintf(cstr, "%s", s.c_str()); // .c_str() takes a std::string object and returns it as a C-style constant sized character pointer, making it usable by the std::sprintf method
 			return cstr;
 		}
 		else {
-			std::sprintf(cstr, "%s %c", s.erase(0, 1).c_str(), '~');
+			std::sprintf(cstr, "%s %c", s.erase(0, 1).c_str(), '~'); // .erase(0,1) removes 1 character at position 0 from a std::string and returns the new std::string. From testing it, I think it updates the current string object instead of creating a new string object, though I only tested it insofar as making the program run correctly, not to figure out how exactly it works. Used to remove the negative sign for postfix notation.
 			return cstr;
 		}
 	}
